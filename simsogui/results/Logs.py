@@ -2,9 +2,10 @@
 # coding=utf-8
 
 from PyQt4.QtGui import QTableWidgetItem, QTableWidget, QHeaderView, QColor
+from ..QCopyTableWidget import QCopyTableWidget
 
 
-class Logs(QTableWidget):
+class Logs(QCopyTableWidget):
     def __init__(self, parent, result):
         QTableWidget.__init__(self, len(result.model.logs), 3, parent=parent)
         self.setWindowTitle("Logs")

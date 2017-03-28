@@ -1,4 +1,4 @@
-from PyQt4.QtCore import Qt, QByteArray, QMimeData
+from PyQt4.QtCore import Qt, QByteArray, QMimeData, QVariant
 from PyQt4.QtGui import QTableWidget, QApplication
 
 
@@ -13,10 +13,11 @@ class QCopyTableWidget(QTableWidget):
                     values += '\n'
                 elif index != indexes[0]:
                     values += '\t'
-                values += self.itemFromIndex(index).text()
+                #values += self.itemFromIndex(index).text()
+                values += self.itemFromIndex(index).text() if self.itemFromIndex(index) != None else ""
                 previous = index
             mimeData = QMimeData()
-            mimeData.setData("text/plain", values)
+            mimeData.setData("text/plain", QVariant(values).toByteArray())
             QApplication.clipboard().setMimeData(mimeData)
         else:
             return QTableWidget.keyPressEvent(self, event)
